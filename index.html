@@ -51,31 +51,40 @@
             }, []);
 
             return (
-                <motion.header 
-                    className={`header ${scrolled ? 'scrolled' : ''}`}
-                    initial={{ y: -100 }}
-                    animate={{ y: 0 }}
-                    transition={{ type: "spring", stiffness: 50, damping: 20 }}
-                >
-                    <div className="container nav-container">
-                        <div className="logo">
-                            <div className="logo-ce">CE</div>
-                            <div className="logo-text">
-                                Cutting Edge
-                                <div className="logo-sub">Landscaping & Snowplowing</div>
-                            </div>
+                <div style={{ position: 'fixed', width: '100%', zIndex: 1000, top: 0 }}>
+                    <div className="top-bar">
+                        <div className="container top-bar-container">
+                            <a href="tel:4168057642">📞 416-805-7642</a>
+                            <a href="mailto:kyle_cuttingedge@hotmail.com">✉️ kyle_cuttingedge@hotmail.com</a>
                         </div>
-                        <nav>
-                            <ul className="nav-links">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#services">About Us</a></li>
-                                <li><a href="#services">Services</a></li>
-                                <li><a href="#partners">Partners</a></li>
-                                <li><motion.a href="#contact" className="btn-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ background: '#519e54', border: 'none' }}>Get a Quote</motion.a></li>
-                            </ul>
-                        </nav>
                     </div>
-                </motion.header>
+                    <motion.header 
+                        className={`header ${scrolled ? 'scrolled' : ''}`}
+                        initial={{ y: -100 }}
+                        animate={{ y: 0 }}
+                        transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                        style={{ position: 'relative' }}
+                    >
+                        <div className="container nav-container">
+                            <div className="logo">
+                                <div className="logo-ce">CE</div>
+                                <div className="logo-text">
+                                    Cutting Edge
+                                    <div className="logo-sub">Landscaping & Snowplowing</div>
+                                </div>
+                            </div>
+                            <nav>
+                                <ul className="nav-links">
+                                    <li><a href="#home">Home</a></li>
+                                    <li><a href="#services">About Us</a></li>
+                                    <li><a href="#services">Services</a></li>
+                                    <li><a href="#partners">Partners</a></li>
+                                    <li><motion.a href="#contact" className="nav-cta" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Get a Free Quote</motion.a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </motion.header>
+                </div>
             );
         }
 
@@ -83,13 +92,18 @@
             const [mode, setMode] = useState('summer'); // 'summer' or 'winter'
             const bgImage = mode === 'summer' ? 'url(assets/summer.png)' : 'url(assets/winter.png)';
 
+            const handleQuoteSubmit = (e) => {
+                e.preventDefault();
+                alert("Thank you! A member of the Cutting Edge team will contact you shortly.");
+            };
+
             return (
-                <section id="home" className="hero" style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center' }}>
+                <section id="home" className="hero" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '120px' }}>
                     <AnimatePresence mode="wait">
                         <motion.div 
                             key={mode}
                             className="hero-bg"
-                            style={{ backgroundImage: bgImage, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.7)' }}
+                            style={{ backgroundImage: bgImage, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.6)' }}
                             initial={{ opacity: 0, scale: 1.05 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
@@ -97,56 +111,127 @@
                         />
                     </AnimatePresence>
 
-                    <div className="hero-content container" style={{ position: 'relative', zIndex: 2, textAlign: 'left', width: '100%' }}>
-                        <motion.h1 
-                            style={{ 
-                                color: 'white', 
-                                fontSize: 'clamp(4rem, 8vw, 8rem)', 
-                                fontWeight: 400, 
-                                lineHeight: '1.2', 
-                                marginBottom: '1.5rem', 
-                                fontFamily: "'Yellowtail', cursive",
-                                WebkitTextStroke: '1px rgba(0,0,0,0.5)',
-                                textShadow: '0px 10px 15px rgba(0,0,0,0.5)'
-                            }}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
-                        >
-                            Transform Your<br/>Outdoors
-                        </motion.h1>
-                        
-                        <motion.p 
-                            style={{ color: '#f1f5f9', fontSize: '1.3rem', marginBottom: '3rem', fontWeight: 500, maxWidth: '600px', lineHeight: '1.6', fontFamily: "'Montserrat', sans-serif" }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.8 }}
-                        >
-                            Premium landscaping and hardscaping solutions tailored for luxury and comfort.
-                        </motion.p>
+                    <div className="hero-content container" style={{ position: 'relative', zIndex: 2 }}>
+                        <div className="hero-grid">
+                            <div className="hero-text" style={{ textAlign: 'left' }}>
+                                <motion.h2
+                                    style={{ 
+                                        color: '#d4af37', 
+                                        fontFamily: "'Yellowtail', cursive", 
+                                        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                                        marginBottom: '-1rem',
+                                        transform: 'rotate(-3deg)',
+                                        display: 'inline-block'
+                                    }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 }}
+                                >
+                                    Transform Your Outdoors
+                                </motion.h2>
+                                <motion.h1 
+                                    style={{ 
+                                        color: 'white', 
+                                        fontSize: 'clamp(3rem, 6vw, 4.5rem)', 
+                                        fontWeight: 900, 
+                                        lineHeight: '1.1', 
+                                        marginBottom: '1.5rem', 
+                                        fontFamily: "'Montserrat', sans-serif",
+                                        textTransform: 'uppercase'
+                                    }}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2, duration: 0.8 }}
+                                >
+                                    Award-Winning Landscaping & Snowplowing
+                                </motion.h1>
+                                
+                                <motion.p 
+                                    style={{ color: '#f1f5f9', fontSize: '1.2rem', marginBottom: '3rem', fontWeight: 500, maxWidth: '600px', lineHeight: '1.6', fontFamily: "'Montserrat', sans-serif" }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.4, duration: 0.8 }}
+                                >
+                                    Premium, fully-insured landscaping and hardscaping solutions tailored for luxury and comfort in the Greater Toronto Area.
+                                </motion.p>
 
-                        <motion.a 
-                            href="#services" 
-                            className="btn-primary" 
-                            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', background: '#519e54', border: 'none', borderRadius: '50px', color: 'white', fontWeight: 'bold', display: 'inline-block', textDecoration: 'none', fontFamily: "'Montserrat', sans-serif" }}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
-                        >
-                            Explore Services
-                        </motion.a>
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.6 }}
+                                    style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '50px', display: 'inline-flex', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}
+                                >
+                                    <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: mode === 'summer' ? 'white' : '#fff', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Landscaping</button>
+                                    <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: mode === 'winter' ? 'white' : '#fff', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Snowplowing</button>
+                                </motion.div>
+                            </div>
+
+                            <motion.div 
+                                className="hero-form-card"
+                                initial={{ opacity: 0, x: 50 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.8, type: "spring" }}
+                            >
+                                <h3>Request a Free Quote</h3>
+                                <form onSubmit={handleQuoteSubmit}>
+                                    <div className="form-group">
+                                        <input type="text" className="form-input" placeholder="Full Name" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="tel" className="form-input" placeholder="Phone Number" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <select className="form-input" required defaultValue="">
+                                            <option value="" disabled>Select Service...</option>
+                                            <option value="landscaping">Landscaping</option>
+                                            <option value="hardscaping">Hardscaping</option>
+                                            <option value="snowplowing">Snowplowing</option>
+                                            <option value="other">Other / Maintenance</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" className="btn-submit">Get My Quote</button>
+                                </form>
+                            </motion.div>
+                        </div>
                     </div>
-
-                    <motion.div 
-                        initial={{ opacity: 0, y: 30, x: '-50%' }}
-                        animate={{ opacity: 1, y: 0, x: '-50%' }}
-                        transition={{ delay: 0.8 }}
-                        style={{ position: 'absolute', bottom: '2.5rem', left: '50%', background: 'white', borderRadius: '50px', display: 'flex', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', zIndex: 3 }}
-                    >
-                        <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: mode === 'summer' ? 'white' : '#333', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Landscaping</button>
-                        <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: mode === 'winter' ? 'white' : '#333', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Snowplowing</button>
-                    </motion.div>
                 </section>
+            );
+        }
+
+        function TrustBanner() {
+            return (
+                <div className="trust-banner">
+                    <div className="container trust-container">
+                        <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                            <span className="trust-badge-icon">⭐</span>
+                            <div>
+                                <div style={{ color: '#d4af37' }}>5.0 Rating</div>
+                                <div>Google Reviews</div>
+                            </div>
+                        </motion.div>
+                        <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                            <span className="trust-badge-icon">🏆</span>
+                            <div>
+                                <div style={{ color: '#d4af37' }}>Best of the Best</div>
+                                <div>HomeStars</div>
+                            </div>
+                        </motion.div>
+                        <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                            <span className="trust-badge-icon">A+</span>
+                            <div>
+                                <div style={{ color: '#d4af37' }}>Accredited</div>
+                                <div>BBB Rating</div>
+                            </div>
+                        </motion.div>
+                        <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                            <span className="trust-badge-icon">🍁</span>
+                            <div>
+                                <div style={{ color: '#d4af37' }}>Member</div>
+                                <div>Landscape Ontario</div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
             );
         }
 
@@ -578,6 +663,7 @@
                 <div>
                     <Header />
                     <Hero />
+                    <TrustBanner />
                     <Services />
                     <Process />
                     <Achievements />
