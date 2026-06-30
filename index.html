@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutting Edge Landscaping & Snowplowing</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- React, ReactDOM, and Babel for in-browser JSX parsing -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Framer Motion via UMD -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Ensure Framer Motion is loaded
+        const { motion, AnimatePresence, useScroll, useTransform, useInView } = window.Motion;
+        const { useState, useEffect, useRef } = React;
+
+        const containerVariants = {
+            hidden: { opacity: 0 },
+            show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.2 }
+            }
+        };
+
+        const itemVariants = {
+            hidden: { opacity: 0, y: 30 },
+            show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
+        };
+
+        function Header() {
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <motion.header 
+                    className={`header ${scrolled ? 'scrolled' : ''}`}
+                    initial={{ y: -100 }}
+                    animate={{ y: 0 }}
+                    transition={{ type: "spring", stiffness: 50, damping: 20 }}
+                >
+                    <div className="container nav-container">
+                        <div className="logo">
+                            <div className="logo-ce">CE</div>
+                            <div className="logo-text">
+                                Cutting Edge
+                                <div className="logo-sub">Landscaping & Snowplowing</div>
+                            </div>
+                        </div>
+                        <nav>
+                            <ul className="nav-links">
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#services">About Us</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#partners">Partners</a></li>
+                                <li><motion.a href="#contact" className="btn-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ background: '#519e54', border: 'none' }}>Get a Quote</motion.a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </motion.header>
+            );
+        }
+
+        function Hero() {
+            const [mode, setMode] = useState('summer'); // 'summer' or 'winter'
+            const bgImage = mode === 'summer' ? 'url(assets/summer.png)' : 'url(assets/winter.png)';
+
+            return (
+                <section id="home" className="hero" style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center' }}>
+                    <AnimatePresence mode="wait">
+                        <motion.div 
+                            key={mode}
+                            className="hero-bg"
+                            style={{ backgroundImage: bgImage, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.7)' }}
+                            initial={{ opacity: 0, scale: 1.05 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                        />
+                    </AnimatePresence>
+
+                    <div className="hero-content container" style={{ position: 'relative', zIndex: 2, textAlign: 'left', width: '100%' }}>
+                        <motion.h1 
+                            style={{ 
+                                color: 'white', 
+                                fontSize: 'clamp(4rem, 8vw, 8rem)', 
+                                fontWeight: 400, 
+                                lineHeight: '1.2', 
+                                marginBottom: '1.5rem', 
+                                fontFamily: "'Yellowtail', cursive",
+                                WebkitTextStroke: '1px rgba(0,0,0,0.5)',
+                                textShadow: '0px 10px 15px rgba(0,0,0,0.5)'
+                            }}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.8 }}
+                        >
+                            Transform Your<br/>Outdoors
+                        </motion.h1>
+                        
+                        <motion.p 
+                            style={{ color: '#f1f5f9', fontSize: '1.3rem', marginBottom: '3rem', fontWeight: 500, maxWidth: '600px', lineHeight: '1.6', fontFamily: "'Montserrat', sans-serif" }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.8 }}
+                        >
+                            Premium landscaping and hardscaping solutions tailored for luxury and comfort.
+                        </motion.p>
+
+                        <motion.a 
+                            href="#services" 
+                            className="btn-primary" 
+                            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', background: '#519e54', border: 'none', borderRadius: '50px', color: 'white', fontWeight: 'bold', display: 'inline-block', textDecoration: 'none', fontFamily: "'Montserrat', sans-serif" }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
+                        >
+                            Explore Services
+                        </motion.a>
+                    </div>
+
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0, x: '-50%' }}
+                        transition={{ delay: 0.8 }}
+                        style={{ position: 'absolute', bottom: '2.5rem', left: '50%', background: 'white', borderRadius: '50px', display: 'flex', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', zIndex: 3 }}
+                    >
+                        <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: mode === 'summer' ? 'white' : '#333', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Landscaping</button>
+                        <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: mode === 'winter' ? 'white' : '#333', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Snowplowing</button>
+                    </motion.div>
+                </section>
+            );
+        }
+
+
+
+        function Services() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+            const services = [
+                { icon: '🌿', title: 'Landscaping', desc: 'Lush sodding, garden design, and vibrant green spaces.' },
+                { icon: '🧱', title: 'Hardscaping', desc: 'Interlocking driveways, elegant patios, retaining walls.' },
+                { icon: '❄️', title: 'Snowplowing', desc: 'Reliable winter clearing for residential and commercial properties.' }
+            ];
+
+            return (
+                <section id="services" className="section bg-light" ref={ref}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            Our Expertise
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.2 }}
+                        >
+                            Our Services
+                        </motion.h2>
+                        <div className="services-grid">
+                            {services.map((s, i) => (
+                                <motion.div 
+                                    key={i} 
+                                    className="service-card"
+                                    variants={itemVariants}
+                                    whileHover={{ scale: 1.05, translateY: -10 }}
+                                >
+                                    <div className="icon">{s.icon}</div>
+                                    <h3>{s.title}</h3>
+                                    <p>{s.desc}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Partners() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-50px" });
+            const partners = [
+                { name: 'Rymar Grass', image: 'assets/raymar grass.png' },
+                { name: 'Best Way Stone', image: 'assets/bestwaystones.png' },
+                { name: 'Permacon', image: 'assets/permacon.png' },
+                { name: 'Oaks Landscape Products', image: 'assets/oaks.png' },
+                { name: 'Banas Stones', image: 'assets/bannas stone.png' },
+                { name: 'In-lite', image: 'assets/inlite.png' },
+                { name: 'Surefoot Hardscape', image: 'assets/surefoot.png' },
+                { name: 'Techo-Bloc', image: 'assets/technobloc.png' },
+                { name: 'Unilock', image: 'assets/unilock.png' }
+            ];
+
+            return (
+                <section id="partners" className="section" ref={ref}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text text-center"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            Preferred Products
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.2 }}
+                        >
+                            Our Trusted Partners
+                        </motion.h2>
+                        
+                        <motion.div 
+                            className="partners-grid"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                        >
+                            {partners.map((p, i) => (
+                                <motion.div 
+                                    key={i} 
+                                    className="partner-card"
+                                    variants={itemVariants}
+                                    whileHover={{ 
+                                        scale: 1.05, 
+                                        borderColor: "var(--primary-green)",
+                                        boxShadow: "0 10px 20px rgba(0,0,0,0.1)"
+                                    }}
+                                >
+                                    <img 
+                                        src={p.image} 
+                                        alt={p.name} 
+                                        className="partner-logo"
+                                        style={{ transform: `scale(${p.scale || 1.8})` }}
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.nextSibling.style.display = 'block';
+                                        }}
+                                    />
+                                    <span className="partner-name" style={{ display: 'none' }}>{p.name}</span>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function AchievementCard({ type, year }) {
+            return (
+                <motion.div 
+                    variants={itemVariants}
+                    style={{
+                        background: 'white',
+                        borderRadius: '16px',
+                        width: '180px',
+                        height: '180px',
+                        padding: '1.5rem',
+                        position: 'relative',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        overflow: 'hidden'
+                    }}
+                >
+                    {/* Small Trophy Top Left */}
+                    <div style={{ position: 'absolute', top: '15px', left: '15px', color: '#3ba4eb', fontSize: '1.2rem' }}>🏆</div>
+                    {/* Faded Large Trophy Top Right/Background */}
+                    <div style={{ position: 'absolute', top: '0', right: '-10px', color: '#e8f4fa', fontSize: '5.5rem', zIndex: 0, opacity: 0.8 }}>🏆</div>
+                    
+                    <div style={{ position: 'relative', zIndex: 1, width: '100%', textAlign: 'center', marginTop: '10px' }}>
+                        {type === 'best' ? (
+                            <>
+                                <div style={{ position: 'relative', display: 'inline-block', marginBottom: '5px' }}>
+                                    <div style={{ position: 'absolute', top: '-18px', left: '-12px', color: '#f59e0b', fontSize: '1.8rem', transform: 'rotate(-25deg)' }}>👑</div>
+                                    <div style={{ background: '#3ba4eb', color: 'white', padding: '4px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                                        HomeStars
+                                    </div>
+                                    <div style={{ position: 'absolute', bottom: '-4px', left: '15px', width: '10px', height: '10px', background: '#3ba4eb', transform: 'rotate(45deg)' }}></div>
+                                </div>
+                                <div style={{ fontWeight: 900, fontSize: '1.4rem', lineHeight: '1.1', color: '#111827', marginTop: '15px' }}>BEST<span style={{ fontSize: '0.85rem', color: '#f59e0b', fontStyle: 'italic', fontWeight: 600, margin: '0 4px', verticalAlign: 'middle' }}>of the</span><br/>BEST</div>
+                                <div style={{ fontSize: '0.65rem', color: '#6b7280', marginTop: '8px', fontWeight: 700, letterSpacing: '1px' }}>WINNER {year}</div>
+                            </>
+                        ) : (
+                            <>
+                                <div style={{ position: 'relative', width: '90px', margin: '0 auto', marginTop: '-10px' }}>
+                                    <div style={{ 
+                                        background: '#3ba4eb', 
+                                        width: '90px', height: '105px', 
+                                        margin: '0 auto', 
+                                        clipPath: 'polygon(50% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
+                                        display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '12px'
+                                    }}>
+                                        <div style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}>HomeStars</div>
+                                        <div style={{ color: 'white', fontSize: '2rem', marginTop: '20px', fontWeight: 'bold' }}>✓</div>
+                                    </div>
+                                    <div style={{ 
+                                        position: 'absolute', top: '40px', left: '-8px', right: '-8px',
+                                        background: '#6b7280', color: 'white', fontSize: '0.7rem', 
+                                        padding: '4px 0', fontWeight: 'bold', letterSpacing: '2px',
+                                        boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                                        clipPath: 'polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%)'
+                                    }}>
+                                        VERIFIED
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </motion.div>
+            );
+        }
+
+        function Achievements() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+            return (
+                <section id="achievements" className="section" style={{ 
+                    position: 'relative', 
+                    background: 'linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url(assets/summer.png) center/cover fixed', 
+                    padding: '6rem 0'
+                }} ref={ref}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text text-center" style={{ color: '#fcf6a7' }}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            Recognized Excellence
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center text-white"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.1 }}
+                        >
+                            Achievements
+                        </motion.h2>
+                        
+                        <motion.div 
+                            style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                        >
+                            <AchievementCard type="best" year="2024" />
+                            <AchievementCard type="verified" />
+                            <AchievementCard type="best" year="2023" />
+                            <AchievementCard type="best" year="2022" />
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Reviews() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+            const reviews = [
+                {
+                    name: "Kevin",
+                    text: "Kyle and team were absolutely great and would highly recommend. Pricing was fair/competitive and he even threw in some extras at no extra charge. I was really just expecting sod and quite happy with the additional mulching and planting to make everything come together nicely. The whole project completed in 2 days and the crew was very professional. Love the final product and great customer experience."
+                },
+                {
+                    name: "Home Stars Customer",
+                    text: "Kyle was super easy to work with from the word GO. The project was well priced and his team is very careful. I am very happy with my landscaping work. He keeps his word and delivers what he promised."
+                },
+                {
+                    name: "Home Stars Customer",
+                    text: "We had our 1960s houses front steps & porch re-done in granite, walkway pavers replaced & redesigned, & a new front garden retaining wall with new plants planted. Kyle met with us 3 times at Islington Nurseries to consult us on which products to use & helped us choose which plants to use. The quality of the work done & the service was excellent. Kyle & his team were great to work with. I will recommend them to anybody needing landscape work done."
+                }
+            ];
+
+            return (
+                <section id="reviews" className="section bg-navy text-white" ref={ref} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div className="container">
+                        <div className="text-center">
+                            <motion.div 
+                                className="accent-text text-center" style={{ color: '#fcf6a7' }}
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                transition={{ duration: 0.8, type: "spring" }}
+                            >
+                                Client Stories
+                            </motion.div>
+                            <motion.h2 
+                                className="section-title text-center text-white"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.1 }}
+                            >
+                                What They Say
+                            </motion.h2>
+                        </div>
+                        
+                        <motion.div 
+                            className="reviews-grid"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                        >
+                            {reviews.map((r, i) => (
+                                <motion.div 
+                                    key={i}
+                                    className="review-card"
+                                    variants={itemVariants}
+                                >
+                                    <div className="review-quote-icon">“</div>
+                                    <div className="review-stars">★★★★★</div>
+                                    <p className="review-text">"{r.text}"</p>
+                                    <div className="review-footer">
+                                        <div className="review-author-info">
+                                            <h4>{r.name}</h4>
+                                            <span className="review-source">HOME STARS REVIEWS</span>
+                                        </div>
+                                        <div className="review-verified">VERIFIED</div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Contact() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+            return (
+                <section id="contact" className="section bg-navy text-white" ref={ref} style={{ paddingBottom: '0' }}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text text-center" style={{ color: '#fcf6a7' }}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            Reach Out Today
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center text-white"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.1 }}
+                        >
+                            Get a Quote
+                        </motion.h2>
+                        <motion.div 
+                            className="contact-grid"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={isInView ? "show" : "hidden"}
+                        >
+                            <motion.a 
+                                href="mailto:kyle_cuttingedge@hotmail.com" 
+                                className="contact-link"
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                            >
+                                <div className="contact-icon">✉️</div>
+                                <span>kyle_cuttingedge@hotmail.com</span>
+                            </motion.a>
+                            <motion.a 
+                                href="tel:4168057642" 
+                                className="contact-link"
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                            >
+                                <div className="contact-icon">📞</div>
+                                <span>416 805 7642</span>
+                            </motion.a>
+                            <motion.a 
+                                href="https://www.google.com/maps/search/?api=1&query=66+Genthorn+Ave,+Etobicoke,+ON+M9W+2S9" 
+                                target="_blank" rel="noopener noreferrer"
+                                className="contact-link"
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                            >
+                                <div className="contact-icon">📍</div>
+                                <span>66 Genthorn Ave, Etobicoke, ON M9W 2S9</span>
+                            </motion.a>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Process() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+            const steps = [
+                { num: '01', sub: 'WE SERVE', title: 'Initial Contact & Consultation', icon: '🗓️' },
+                { num: '02', sub: 'WE SERVE', title: 'Site Visit & Assessment', icon: '📍' },
+                { num: '03', sub: 'WE SERVE', title: 'Written Proposal', icon: '📝' },
+                { num: '04', sub: 'WE SERVE', title: "Project Execution", icon: '🔨' }
+            ];
+
+            return (
+                <section id="process" className="section bg-navy text-white" ref={ref}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text text-center" style={{ color: '#fcf6a7' }}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            How We Work
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center text-white"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.1 }}
+                        >
+                            Our Process
+                        </motion.h2>
+
+                        <div className="process-timeline">
+                            <div className="process-line"></div>
+                            <div className="process-steps">
+                                {steps.map((s, i) => (
+                                    <motion.div 
+                                        key={i}
+                                        className={`process-card ${i % 2 === 0 ? 'down' : 'up'}`}
+                                        variants={itemVariants}
+                                        initial="hidden"
+                                        animate={isInView ? "show" : "hidden"}
+                                    >
+                                        <div className="step-num">{s.num}</div>
+                                        <div className="step-content">
+                                            <div className="step-sub">{s.sub}</div>
+                                            <div className="step-title">{s.title}</div>
+                                        </div>
+                                        <div className="step-icon">{s.icon}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Header />
+                    <Hero />
+                    <Services />
+                    <Process />
+                    <Achievements />
+                    <Partners />
+                    <Reviews />
+                    <Contact />
+                    <footer className="bg-navy text-white" style={{ padding: '3rem 0', textAlign: 'center' }}>
+                        <div className="container">
+                            <h2 style={{ color: 'white', fontFamily: 'Montserrat', fontWeight: 900 }}>CUTTING EDGE</h2>
+                            <p>Landscaping & Snowplowing</p>
+                            <p style={{ marginTop: '2rem', color: '#a0aab5' }}>&copy; 2004 - 2026 Cutting Edge Landscaping & Snowplowing</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
