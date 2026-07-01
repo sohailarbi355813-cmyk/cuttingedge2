@@ -65,9 +65,9 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px); /* Safari support */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    padding: 0.5rem 0;
 }
-.nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; transition: height 0.3s ease; }
+.header.scrolled .nav-container { height: 60px; }
 
 /* Logo Elements matching the image */
 .logo { display: flex; align-items: center; gap: 15px; }
@@ -97,6 +97,14 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     text-transform: none;
     letter-spacing: 0;
     margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+    .nav-container { height: 65px; }
+    .header.scrolled .nav-container { height: 60px; }
+    .logo-ce { width: 38px; height: 38px; font-size: 1.2rem; }
+    .logo-text { font-size: 1.25rem; }
+    .logo-sub { font-size: 0.7rem; margin-top: 0; }
 }
 
 .nav-links { display: flex; list-style: none; align-items: center; gap: 2.5rem; }
