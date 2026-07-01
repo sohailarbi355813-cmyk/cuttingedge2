@@ -8,7 +8,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Yellowtail&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 
@@ -801,6 +801,94 @@
             );
         }
 
+        function AboutUs() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+            return (
+                <section id="about" className="section bg-light" ref={ref} style={{ position: 'relative', overflow: 'hidden', padding: '6rem 0', backgroundColor: '#ffffff' }}>
+                    <div className="about-watermark">
+                        ABOUT US
+                    </div>
+                    
+                    <div className="container about-container">
+                        <div className="about-text-column">
+                            <motion.div 
+                                className="accent-text"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                transition={{ duration: 0.8, type: "spring" }}
+                                style={{ marginBottom: '1rem', textAlign: 'left' }}
+                            >
+                                Who We Are
+                            </motion.div>
+                            <motion.h2 
+                                className="about-heading"
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.8 }}
+                            >
+                                Creating stunning landscapes since <span style={{ color: 'var(--primary-green)' }}>2004.</span>
+                            </motion.h2>
+                            <motion.div 
+                                className="about-text-block"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                            >
+                                <p>Cutting Edge Landscaping & Snowplowing has been creating stunning landscapes surrounding Toronto, Ontario, since 2004. We combine our talent and expertise with our clients' visions and concepts — creating beautiful outdoor living areas for many years.</p>
+                                <p>We are involved in numerous skillful associations to be acknowledged as an industry leader. We are proud of our dedication to controlling budgetary constraints and timelines and the transparency we communicate with our clients and consultants.</p>
+                                <p>Interlocking stone and flagstone natural stone are among our specializations — excellent choices for pathways, driveways, and patios, adding elegance and durability to your landscape.</p>
+                            </motion.div>
+
+                            <motion.div 
+                                className="about-highlight-box"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                            >
+                                <p>A constant focus on detail, dependable service, and a personalized, step-by-step process for every client has earned the reputation of Cutting Edge Landscaping. Our determination to benefit our clients has resulted in an impressive referral rate among the top in the industry.</p>
+                                <p className="highlight-strong">By focusing on teamwork and family values, Cutting Edge Landscaping & Snowplowing is dedicated to helping our clients achieve their visions. We are the industry leader with the highest quality of artistry and commitment to our work.</p>
+                                
+                                <div className="about-tags">
+                                    <span className="about-tag"><span className="tag-dot"></span> COMMERCIAL</span>
+                                    <span className="about-tag"><span className="tag-dot"></span> RESIDENTIAL</span>
+                                    <span className="about-tag"><span className="tag-dot"></span> INDUSTRIAL</span>
+                                </div>
+                            </motion.div>
+                        </div>
+                        
+                        <div className="about-image-column">
+                            <motion.div 
+                                className="about-image-wrapper primary-wrapper"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                transition={{ duration: 0.8, delay: 0.3 }}
+                            >
+                                <img src="assets/deckfrances.jpeg" alt="Beautiful landscaping project" className="about-img main-img" />
+                            </motion.div>
+                            <motion.div 
+                                className="about-image-wrapper secondary-wrapper"
+                                initial={{ opacity: 0, x: 50 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                            >
+                                <img src="assets/flagstone natural stone.jpeg" alt="Hardscaping project" className="about-img secondary-img" />
+                                <div className="about-badge badge-years">
+                                    <div className="badge-num">20+</div>
+                                    <div className="badge-text">YEARS OF<br/>EXCELLENCE</div>
+                                </div>
+                                <div className="about-badge badge-specialty">
+                                    <div className="badge-specialty-sub">SPECIALTY</div>
+                                    <div className="badge-specialty-title">Hardscaping</div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         function App() {
             return (
                 <div>
@@ -813,6 +901,7 @@
                     <Achievements />
                     <Partners />
                     <Reviews />
+                    <AboutUs />
                     <Contact />
                     <footer className="bg-navy text-white" style={{ padding: '3rem 0', textAlign: 'center' }}>
                         <div className="container">
