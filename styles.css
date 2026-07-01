@@ -282,7 +282,7 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 /* Sections */
 .section { padding: 6rem 0; }
 .section-title { 
-    font-size: 3rem; 
+    font-size: clamp(2rem, 6vw, 3rem); 
     margin-bottom: 3rem; 
     text-transform: uppercase; 
     letter-spacing: 2px; 
@@ -292,12 +292,13 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 
 .accent-text {
     font-family: var(--font-script);
-    font-size: 4.5rem;
+    font-size: clamp(1.8rem, 6vw, 4.5rem);
     color: var(--primary-green);
     line-height: 1;
     margin-bottom: -1rem;
     transform: rotate(-3deg);
     display: inline-block;
+    white-space: nowrap;
 }
 
 /* Services */
@@ -397,7 +398,6 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 }
 
 @media (max-width: 992px) {
-    .accent-text { font-size: 4rem; }
     .hero-subtitle { font-size: 0.9rem; }
     .logo-ce-large { font-size: 2.5rem; }
     .logo-text-large { font-size: 2rem; }
