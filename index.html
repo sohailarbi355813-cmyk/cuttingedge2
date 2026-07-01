@@ -93,7 +93,7 @@
             const bgImage = mode === 'summer' ? 'url(assets/summer.png)' : 'url(assets/winter.png)';
 
             return (
-                <section id="home" className="hero" style={{ position: 'relative', minHeight: '100dvh', display: 'flex', alignItems: 'center', paddingTop: '120px', paddingBottom: '60px' }}>
+                <section id="home" className="hero" style={{ position: 'relative', minHeight: '100dvh', display: 'flex', alignItems: 'center', paddingTop: '120px', paddingBottom: '60px', overflowX: 'hidden' }}>
                     <AnimatePresence mode="wait">
                         <motion.div 
                             key={mode}
@@ -106,19 +106,18 @@
                         />
                     </AnimatePresence>
 
-                    <div className="hero-content container" style={{ position: 'relative', zIndex: 2 }}>
+                    <div className="hero-content container" style={{ position: 'relative', zIndex: 2, width: '100%', boxSizing: 'border-box' }}>
                         <div className="hero-grid">
                             <div className="hero-text">
                                 <motion.h2
                                     style={{ 
                                         color: '#d4af37', 
                                         fontFamily: "'Yellowtail', cursive", 
-                                        fontSize: 'clamp(1.8rem, 6vw, 4rem)',
-                                        marginBottom: '-1rem',
+                                        fontSize: 'clamp(1.6rem, 5vw, 3.5rem)',
+                                        marginBottom: '-0.5rem',
                                         transform: 'rotate(-3deg)',
-                                        display: 'inline-block',
-                                        overflowWrap: 'break-word',
-                                        maxWidth: '100%'
+                                        display: 'block',
+                                        width: '100%'
                                     }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -129,14 +128,14 @@
                                 <motion.h1 
                                     style={{ 
                                         color: 'white', 
-                                        fontSize: 'clamp(2rem, 8vw, 4.5rem)', 
+                                        fontSize: 'clamp(1.8rem, 7vw, 4.5rem)', 
                                         fontWeight: 900, 
                                         lineHeight: '1.1', 
                                         marginBottom: '1.5rem', 
                                         fontFamily: "'Montserrat', sans-serif",
                                         textTransform: 'uppercase',
-                                        overflowWrap: 'break-word',
-                                        maxWidth: '100%'
+                                        width: '100%',
+                                        wordBreak: 'break-word'
                                     }}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -146,7 +145,7 @@
                                 </motion.h1>
                                 
                                 <motion.p 
-                                    style={{ color: '#f1f5f9', fontSize: '1.2rem', marginBottom: '3rem', fontWeight: 500, maxWidth: '600px', lineHeight: '1.6', fontFamily: "'Montserrat', sans-serif" }}
+                                    style={{ color: '#f1f5f9', fontSize: 'clamp(0.95rem, 3vw, 1.2rem)', marginBottom: '2.5rem', fontWeight: 500, width: '100%', lineHeight: '1.6', fontFamily: "'Montserrat', sans-serif" }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4, duration: 0.8 }}
@@ -158,10 +157,10 @@
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.6 }}
-                                    style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderRadius: '50px', display: 'inline-flex', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}
+                                    style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderRadius: '50px', display: 'flex', width: 'fit-content', maxWidth: '100%', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}
                                 >
-                                    <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: mode === 'summer' ? 'white' : '#fff', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Landscaping</button>
-                                    <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: mode === 'winter' ? 'white' : '#fff', border: 'none', padding: '0.8rem 2.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif" }}>Snowplowing</button>
+                                    <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif", whiteSpace: 'nowrap' }}>Landscaping</button>
+                                    <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif", whiteSpace: 'nowrap' }}>Snowplowing</button>
                                 </motion.div>
                             </div>
 
