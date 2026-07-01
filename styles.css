@@ -301,17 +301,72 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     white-space: nowrap;
 }
 
-/* Services */
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 .service-card {
     background: var(--white);
-    padding: 3rem 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    position: relative;
+    border: 3px solid rgba(81, 158, 84, 0.2); /* light green border matching screenshot */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.service-card .icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
-.service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+.service-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 15px 40px rgba(81, 158, 84, 0.2);
+}
+.service-card-top {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    position: relative;
+}
+.service-title { 
+    font-size: 1.1rem; 
+    color: var(--primary-green);
+    font-weight: 800;
+    margin-bottom: 0;
+    width: 80%; /* leave room for + btn */
+    min-height: 2.5rem;
+}
+.service-plus-btn {
+    position: absolute;
+    right: 1.5rem;
+    bottom: -15px; /* overlap the image */
+    z-index: 2;
+    background: var(--primary-green);
+    color: white;
+    border: 2px solid white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(81, 158, 84, 0.4);
+    transition: 0.3s;
+}
+.service-plus-btn:hover {
+    background: var(--secondary-navy);
+    transform: rotate(90deg);
+}
+.service-img-wrapper {
+    width: 100%;
+    height: 220px;
+    margin-top: 15px;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    box-sizing: border-box;
+}
+.service-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
 
 /* Partners */
 .partners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }

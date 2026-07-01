@@ -243,9 +243,16 @@
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
             const services = [
-                { title: 'Landscaping', desc: 'Lush sodding, garden design, and vibrant green spaces.' },
-                { title: 'Hardscaping', desc: 'Interlocking driveways, elegant patios, retaining walls.' },
-                { title: 'Snowplowing', desc: 'Reliable winter clearing for residential and commercial properties.' }
+                { title: 'Flagstone Natural Stone', image: 'assets/flagstone natural stone.jpeg' },
+                { title: 'Retaining Walls', image: 'assets/retaining walls.jpeg' },
+                { title: 'Hot tubs', image: 'assets/hottubs.jpeg' },
+                { title: 'Decks Fences', image: 'assets/deckfrances.jpeg' },
+                { title: 'Artificial Turf', image: 'assets/artificalterf.jpeg' },
+                { title: 'Property Maintenance', image: 'assets/property maintainance.jpeg' },
+                { title: 'Pool', image: 'assets/pond.jpeg' },
+                { title: 'Snow removal', image: 'assets/snow removal.jpeg' },
+                { title: 'Interlocking Stone', image: 'assets/interlockingstone.jpeg' },
+                { title: 'Sodding', image: 'assets/sodding.jpeg' }
             ];
 
             return (
@@ -273,11 +280,15 @@
                                     key={i} 
                                     className="service-card"
                                     variants={itemVariants}
-                                    whileHover={{ scale: 1.05, translateY: -10 }}
+                                    whileHover={{ scale: 1.05, translateY: -5 }}
                                 >
-                                    <div className="icon" style={{ fontSize: '2.5rem', fontWeight: 900, color: '#d4af37' }}>0{i + 1}</div>
-                                    <h3>{s.title}</h3>
-                                    <p>{s.desc}</p>
+                                    <div className="service-card-top">
+                                        <h3 className="service-title">{s.title}</h3>
+                                        <button className="service-plus-btn">+</button>
+                                    </div>
+                                    <div className="service-img-wrapper">
+                                        <img src={s.image} alt={s.title} className="service-image" />
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
