@@ -43,6 +43,7 @@
 
         function Header() {
             const [scrolled, setScrolled] = useState(false);
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
 
             useEffect(() => {
                 const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -73,16 +74,41 @@
                                     <div className="logo-sub">Landscaping & Snowplowing</div>
                                 </div>
                             </div>
-                            <nav>
+                            <nav className="desktop-nav">
                                 <ul className="nav-links">
                                     <li><a href="#home">Home</a></li>
                                     <li><a href="#services">About Us</a></li>
                                     <li><a href="#services">Services</a></li>
+                                    <li><a href="#gallery">Gallery</a></li>
                                     <li><a href="#partners">Partners</a></li>
                                     <li><motion.a href="#contact" className="nav-cta" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Get a Free Quote</motion.a></li>
                                 </ul>
                             </nav>
+                            <div className="mobile-hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                <div className={`hamburger-line ${isMenuOpen ? 'open-1' : ''}`}></div>
+                                <div className={`hamburger-line ${isMenuOpen ? 'open-2' : ''}`}></div>
+                                <div className={`hamburger-line ${isMenuOpen ? 'open-3' : ''}`}></div>
+                            </div>
                         </div>
+                        <AnimatePresence>
+                            {isMenuOpen && (
+                                <motion.div 
+                                    className="mobile-nav-overlay"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                >
+                                    <ul className="mobile-nav-links">
+                                        <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+                                        <li><a href="#services" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+                                        <li><a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a></li>
+                                        <li><a href="#gallery" onClick={() => setIsMenuOpen(false)}>Gallery</a></li>
+                                        <li><a href="#partners" onClick={() => setIsMenuOpen(false)}>Partners</a></li>
+                                        <li><a href="#contact" className="nav-cta" onClick={() => setIsMenuOpen(false)}>Get a Free Quote</a></li>
+                                    </ul>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </motion.header>
                 </div>
             );
@@ -626,6 +652,75 @@
             );
         }
 
+        function Gallery() {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+            const galleryItems = [
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.16 AM.jpeg', desc: 'Custom driveway and walkway interlocking design for a residential client.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.17 AM (1).jpeg', desc: 'Beautiful natural stone patio installation perfect for summer hosting.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.17 AM.jpeg', desc: 'Elegant retaining wall construction and garden bed preparation.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.18 AM (1).jpeg', desc: 'Precise property maintenance and lush green lawn care.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.19 AM (1).jpeg', desc: 'Transformative backyard landscaping project with natural stone pathways.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.20 AM (2).jpeg', desc: 'High-end pool surround integration with interlocking stone.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (1).jpeg', desc: 'Custom built wooden deck and privacy fencing installation.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (2).jpeg', desc: 'Artificial turf installation for a zero-maintenance, evergreen yard.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (3).jpeg', desc: 'Professional commercial snow clearing and de-icing services.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM.jpeg', desc: 'Premium sodding and soil grading for a perfectly level lawn.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.22 AM.jpeg', desc: 'Stunning water feature and pond design for backyard tranquility.' },
+                { src: 'assets/artificalterf.jpeg', desc: 'Flawless artificial turf laying ensuring proper drainage and longevity.' },
+                { src: 'assets/deckfrances.jpeg', desc: 'Durable and aesthetic deck construction tailored to client specifications.' },
+                { src: 'assets/flagstone natural stone.jpeg', desc: 'Intricate flagstone natural stone steps and walkway integration.' },
+                { src: 'assets/hottubs.jpeg', desc: 'Hot tub surround landscaping for an ultimate backyard oasis.' },
+                { src: 'assets/interlockingstone.jpeg', desc: 'Precision interlocking stone driveway built to withstand Canadian winters.' },
+                { src: 'assets/pond.jpeg', desc: 'Custom pool installation with seamless hardscape borders.' },
+                { src: 'assets/property maintainance.jpeg', desc: 'Ongoing property maintenance keeping curb appeal at its absolute best.' },
+                { src: 'assets/retaining walls.jpeg', desc: 'Structurally sound and visually striking retaining wall tiers.' },
+                { src: 'assets/snow removal.jpeg', desc: 'Rapid-response residential snow plowing and winter property management.' },
+                { src: 'assets/sodding.jpeg', desc: 'Complete lawn overhaul with premium grade sod installation.' }
+            ];
+
+            return (
+                <section id="gallery" className="section" ref={ref}>
+                    <div className="container text-center">
+                        <motion.div 
+                            className="accent-text"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                            transition={{ duration: 0.8, type: "spring" }}
+                        >
+                            Our Gallery
+                        </motion.div>
+                        <motion.h2 
+                            className="section-title text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.2 }}
+                        >
+                            Recent Projects
+                        </motion.h2>
+                        
+                        <div className="gallery-grid">
+                            {galleryItems.map((item, i) => (
+                                <motion.div 
+                                    key={i} 
+                                    className="gallery-item"
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate={isInView ? "show" : "hidden"}
+                                >
+                                    <img src={item.src} alt="Landscaping project" loading="lazy" />
+                                    <div className="gallery-overlay">
+                                        <p>{item.desc}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         function Process() {
             const ref = useRef(null);
             const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -690,6 +785,7 @@
                     <Hero />
                     <TrustBanner />
                     <Services />
+                    <Gallery />
                     <Process />
                     <Achievements />
                     <Partners />
