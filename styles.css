@@ -372,9 +372,10 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    transform: scale(var(--base-scale, 1));
 }
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(calc(var(--base-scale, 1) + 0.1));
 }
 .gallery-overlay {
     position: absolute;
@@ -393,6 +394,12 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 }
 .gallery-item:hover .gallery-overlay {
     transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .gallery-item.mobile-in-view .gallery-overlay {
+        transform: translateY(0);
+    }
 }
 
 /* Partners */

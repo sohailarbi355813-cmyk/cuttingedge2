@@ -652,18 +652,52 @@
             );
         }
 
+        function GalleryItemComponent({ item }) {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { margin: "-20%" });
+            const [isMobile, setIsMobile] = useState(false);
+
+            useEffect(() => {
+                const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+                checkMobile();
+                window.addEventListener('resize', checkMobile);
+                return () => window.removeEventListener('resize', checkMobile);
+            }, []);
+
+            return (
+                <motion.div 
+                    ref={ref}
+                    className={`gallery-item ${isMobile && isInView ? 'mobile-in-view' : ''}`}
+                    variants={itemVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "50px" }}
+                >
+                    <img 
+                        src={item.src} 
+                        alt="Landscaping project" 
+                        loading="lazy" 
+                        style={{ '--base-scale': item.scale || 1 }} 
+                    />
+                    <div className="gallery-overlay">
+                        <p>{item.desc}</p>
+                    </div>
+                </motion.div>
+            );
+        }
+
         function Gallery() {
             const ref = useRef(null);
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
             const galleryItems = [
-                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.16 AM.jpeg', desc: 'Custom driveway and walkway interlocking design for a residential client.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.16 AM.jpeg', desc: 'Custom driveway and walkway interlocking design for a residential client.', scale: 1.35 },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.17 AM (1).jpeg', desc: 'Beautiful natural stone patio installation perfect for summer hosting.' },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.17 AM.jpeg', desc: 'Elegant retaining wall construction and garden bed preparation.' },
-                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.18 AM (1).jpeg', desc: 'Precise property maintenance and lush green lawn care.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.18 AM (1).jpeg', desc: 'Precise property maintenance and lush green lawn care.', scale: 1.35 },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.19 AM (1).jpeg', desc: 'Transformative backyard landscaping project with natural stone pathways.' },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.20 AM (2).jpeg', desc: 'High-end pool surround integration with interlocking stone.' },
-                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (1).jpeg', desc: 'Custom built wooden deck and privacy fencing installation.' },
+                { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (1).jpeg', desc: 'Custom built wooden deck and privacy fencing installation.', scale: 1.35 },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (2).jpeg', desc: 'Artificial turf installation for a zero-maintenance, evergreen yard.' },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM (3).jpeg', desc: 'Professional commercial snow clearing and de-icing services.' },
                 { src: 'assets/WhatsApp Image 2026-06-30 at 8.36.21 AM.jpeg', desc: 'Premium sodding and soil grading for a perfectly level lawn.' },
@@ -702,18 +736,7 @@
                         
                         <div className="gallery-grid">
                             {galleryItems.map((item, i) => (
-                                <motion.div 
-                                    key={i} 
-                                    className="gallery-item"
-                                    variants={itemVariants}
-                                    initial="hidden"
-                                    animate={isInView ? "show" : "hidden"}
-                                >
-                                    <img src={item.src} alt="Landscaping project" loading="lazy" />
-                                    <div className="gallery-overlay">
-                                        <p>{item.desc}</p>
-                                    </div>
-                                </motion.div>
+                                <GalleryItemComponent key={i} item={item} />
                             ))}
                         </div>
                     </div>
