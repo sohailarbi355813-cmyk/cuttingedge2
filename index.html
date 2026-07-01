@@ -262,7 +262,101 @@
             );
         }
 
+        function TrustVideo() {
+            const containerRef = useRef(null);
+            const videoRef = useRef(null);
+            const isInView = useInView(containerRef, { margin: "-20% 0px" });
+            const [isMuted, setIsMuted] = useState(false);
+            const [isMinimized, setIsMinimized] = useState(false);
 
+            React.useEffect(() => {
+                let timer;
+                if (videoRef.current) {
+                    if (isInView) {
+                        videoRef.current.play().catch(e => {
+                            console.log("Autoplay with sound prevented, falling back to muted", e);
+                            videoRef.current.muted = true;
+                            setIsMuted(true);
+                            videoRef.current.play();
+                        });
+                        timer = setTimeout(() => setIsMinimized(true), 1500);
+                    } else {
+                        videoRef.current.pause();
+                        setIsMinimized(false);
+                    }
+                }
+                return () => clearTimeout(timer);
+            }, [isInView]);
+
+            const toggleMute = () => {
+                if (videoRef.current) {
+                    videoRef.current.muted = !videoRef.current.muted;
+                    setIsMuted(videoRef.current.muted);
+                }
+            };
+
+            return (
+                <section className="trust-video-section" ref={containerRef}>
+                    <video 
+                        ref={videoRef}
+                        src="assets/cutting edge demo video.mp4"
+                        className="trust-video-element"
+                        muted={isMuted}
+                        loop
+                        playsInline
+                    />
+                    <div className="trust-video-overlay" style={{
+                        justifyContent: isMinimized ? 'flex-end' : 'center',
+                        alignItems: isMinimized ? 'flex-start' : 'center',
+                        padding: isMinimized ? '40px' : '1rem',
+                        transition: 'all 1s ease-in-out'
+                    }}>
+                        <button 
+                            onClick={toggleMute}
+                            style={{
+                                position: 'absolute',
+                                bottom: '20px',
+                                right: '20px',
+                                background: 'rgba(0,0,0,0.5)',
+                                color: 'white',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                borderRadius: '50px',
+                                padding: '10px 20px',
+                                cursor: 'pointer',
+                                zIndex: 10,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                fontSize: '0.9rem',
+                                fontWeight: 'bold',
+                                transition: 'all 0.3s'
+                            }}
+                            onMouseOver={(e) => e.target.style.background = 'rgba(0,0,0,0.8)'}
+                            onMouseOut={(e) => e.target.style.background = 'rgba(0,0,0,0.5)'}
+                        >
+                            {isMuted ? '🔇 Unmute' : '🔊 Mute'}
+                        </button>
+                        <motion.div 
+                            layout
+                            className="trust-video-content"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={isInView ? { opacity: 1, scale: isMinimized ? 0.5 : 1 } : { opacity: 0 }}
+                            transition={{ duration: 1.2, type: "spring", bounce: 0.15 }}
+                            style={{ 
+                                transformOrigin: 'bottom left',
+                                textAlign: isMinimized ? 'left' : 'center'
+                            }}
+                        >
+                            <div className="accent-text" style={{ color: '#d4af37', textShadow: '0 2px 4px rgba(0,0,0,0.5)', marginBottom: '0.5rem', textAlign: isMinimized ? 'left' : 'center' }}>
+                                Our Work
+                            </div>
+                            <h2 className="video-title">See Excellence in Action.</h2>
+                            <p className="video-subtitle">Over two decades of award-winning craftsmanship, beautifully captured.</p>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
 
         function Services() {
             const ref = useRef(null);
@@ -896,6 +990,7 @@
                     <Header />
                     <Hero />
                     <TrustBanner />
+                    <TrustVideo />
                     <Services />
                     <Process />
                     <Gallery />
