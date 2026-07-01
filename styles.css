@@ -504,6 +504,7 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     justify-content: flex-end;
     gap: 2rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 .top-bar a {
     color: #a0aab5;
@@ -524,12 +525,32 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     align-items: center;
     width: 100%;
 }
+.hero-text {
+    text-align: left;
+}
 @media (max-width: 992px) {
+    .top-bar-container {
+        justify-content: center;
+        gap: 1rem;
+        font-size: 0.75rem;
+    }
+    .hero-text {
+        text-align: center;
+    }
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
-        margin-top: 5rem;
+        margin-top: 3rem;
+    }
+    .hero-form-card {
+        padding: 1.5rem !important;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
+    }
+    .container {
+        padding: 0 1.5rem;
     }
 }
 
