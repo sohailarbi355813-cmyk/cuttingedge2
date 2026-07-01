@@ -242,17 +242,30 @@
             const ref = useRef(null);
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+            const svgs = {
+                flagstone: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v7H4zm8 0h8v5h-8zm-2 9H4v7h6zm4-2h6v9h-6z"/></svg>,
+                wall: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 14h20v3H2zm0 5h20v3H2zM4 9h16v3H4z"/></svg>,
+                spa: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 15a5 5 0 1 1 5-5 5 5 0 0 1-5 5z"/></svg>,
+                fence: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 4v16M12 4v16M19 4v16M3 10h18M3 14h18"/></svg>,
+                turf: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 16h18v4H3zm1.5-6h15l1.5-4H3z"/></svg>,
+                house: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h14v-8h3L12 3zm-2 15v-5h4v5h-4z"/></svg>,
+                pool: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 16h18v3H3zm3-4h12v3H6zm3-4h6v3H9z"/></svg>,
+                snow: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-4v-3H9v3H5l-3 6h20z"/></svg>,
+                interlock: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h6v6H4zm8 0h8v6h-8zm-8 8h8v8H4zm10 0h6v8h-6z"/></svg>,
+                sodding: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 16h20v4H2zm4-6h12v4H6z"/></svg>
+            };
+
             const services = [
-                { title: 'Flagstone Natural Stone', image: 'assets/flagstone natural stone.jpeg', objectPosition: 'center 35%' },
-                { title: 'Retaining Walls', image: 'assets/retaining walls.jpeg', objectPosition: 'center' },
-                { title: 'Hot tubs', image: 'assets/hottubs.jpeg', objectPosition: 'center' },
-                { title: 'Decks Fences', image: 'assets/deckfrances.jpeg', objectPosition: 'center' },
-                { title: 'Artificial Turf', image: 'assets/artificalterf.jpeg', objectPosition: 'center' },
-                { title: 'Property Maintenance', image: 'assets/property maintainance.jpeg', objectPosition: 'center' },
-                { title: 'Pool', image: 'assets/pond.jpeg', objectPosition: 'center' },
-                { title: 'Snow removal', image: 'assets/snow removal.jpeg', objectPosition: 'center' },
-                { title: 'Interlocking Stone', image: 'assets/interlockingstone.jpeg', objectPosition: 'center' },
-                { title: 'Sodding', image: 'assets/sodding.jpeg', objectPosition: 'center' }
+                { title: 'Flagstone Natural Stone', image: 'assets/flagstone natural stone.jpeg', objectPosition: 'center 35%', icon: svgs.flagstone },
+                { title: 'Retaining Walls', image: 'assets/retaining walls.jpeg', objectPosition: 'center', icon: svgs.wall },
+                { title: 'Hot tubs', image: 'assets/hottubs.jpeg', objectPosition: 'center', icon: svgs.spa },
+                { title: 'Decks Fences', image: 'assets/deckfrances.jpeg', objectPosition: 'center', icon: svgs.fence },
+                { title: 'Artificial Turf', image: 'assets/artificalterf.jpeg', objectPosition: 'center', icon: svgs.turf },
+                { title: 'Property Maintenance', image: 'assets/property maintainance.jpeg', objectPosition: 'center', icon: svgs.house },
+                { title: 'Pool', image: 'assets/pond.jpeg', objectPosition: 'center', icon: svgs.pool },
+                { title: 'Snow removal', image: 'assets/snow removal.jpeg', objectPosition: 'center', icon: svgs.snow },
+                { title: 'Interlocking Stone', image: 'assets/interlockingstone.jpeg', objectPosition: 'center', icon: svgs.interlock },
+                { title: 'Sodding', image: 'assets/sodding.jpeg', objectPosition: 'center', icon: svgs.sodding }
             ];
 
             return (
@@ -283,6 +296,8 @@
                                     whileHover={{ scale: 1.05, translateY: -5 }}
                                 >
                                     <div className="service-card-top">
+                                        <div className="service-icon-watermark">{s.icon}</div>
+                                        <div className="service-icon-primary">{s.icon}</div>
                                         <h3 className="service-title">{s.title}</h3>
                                         <button className="service-plus-btn">+</button>
                                     </div>

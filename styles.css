@@ -321,8 +321,27 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 .service-card-top {
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
     position: relative;
+    overflow: hidden; /* keep watermark inside top section */
+}
+.service-icon-primary {
+    width: 35px;
+    height: 35px;
+    color: var(--primary-green);
+    margin-bottom: 0.8rem;
+}
+.service-icon-watermark {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    width: 130px;
+    height: 130px;
+    color: var(--primary-green);
+    opacity: 0.05;
+    z-index: 0;
 }
 .service-title { 
+    position: relative;
+    z-index: 1;
     font-size: 1.1rem; 
     color: var(--primary-green);
     font-weight: 800;
