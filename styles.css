@@ -321,23 +321,12 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
 .service-card-top {
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
     position: relative;
-    overflow: hidden; /* keep watermark inside top section */
 }
 .service-icon-primary {
     width: 35px;
     height: 35px;
     color: var(--primary-green);
     margin-bottom: 0.8rem;
-}
-.service-icon-watermark {
-    position: absolute;
-    top: -15px;
-    right: -10px;
-    width: 130px;
-    height: 130px;
-    color: var(--primary-green);
-    opacity: 0.05;
-    z-index: 0;
 }
 .service-title { 
     position: relative;
@@ -346,32 +335,8 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     color: var(--primary-green);
     font-weight: 800;
     margin-bottom: 0;
-    width: 80%; /* leave room for + btn */
+    width: 100%;
     min-height: 2.5rem;
-}
-.service-plus-btn {
-    position: absolute;
-    right: 1.5rem;
-    bottom: -15px; /* overlap the image */
-    z-index: 2;
-    background: var(--primary-green);
-    color: white;
-    border: 2px solid white;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(81, 158, 84, 0.4);
-    transition: 0.3s;
-}
-.service-plus-btn:hover {
-    background: var(--secondary-navy);
-    transform: rotate(90deg);
 }
 .service-img-wrapper {
     width: 100%;
