@@ -54,8 +54,8 @@
                 <div style={{ position: 'fixed', width: '100%', zIndex: 1000, top: 0 }}>
                     <div className="top-bar">
                         <div className="container top-bar-container">
-                            <a href="tel:4168057642">📞 416-805-7642</a>
-                            <a href="mailto:kyle_cuttingedge@hotmail.com">✉️ kyle_cuttingedge@hotmail.com</a>
+                            <a href="tel:4168057642">Call: 416-805-7642</a>
+                            <a href="mailto:kyle_cuttingedge@hotmail.com">Email: kyle_cuttingedge@hotmail.com</a>
                         </div>
                     </div>
                     <motion.header 
@@ -159,8 +159,8 @@
                                     transition={{ delay: 0.6 }}
                                     className="hero-toggle"
                                 >
-                                    <button onClick={() => setMode('summer')} className={`toggle-pill ${mode === 'summer' ? 'active' : ''}`}>🌿 Landscaping</button>
-                                    <button onClick={() => setMode('winter')} className={`toggle-pill ${mode === 'winter' ? 'active' : ''}`}>❄️ Snowplowing</button>
+                                    <button onClick={() => setMode('summer')} className={`toggle-pill ${mode === 'summer' ? 'active' : ''}`}>Landscaping</button>
+                                    <button onClick={() => setMode('winter')} className={`toggle-pill ${mode === 'winter' ? 'active' : ''}`}>Snowplowing</button>
                                 </motion.div>
                             </div>
 
@@ -190,7 +190,7 @@
                                             <option value="other">Other / Maintenance</option>
                                         </select>
                                     </div>
-                                    <button type="submit" className="btn-submit">📩 Get My Free Quote</button>
+                                    <button type="submit" className="btn-submit">Get My Free Quote</button>
                                 </form>
                             </motion.div>
                         </div>
@@ -204,14 +204,14 @@
                 <div className="trust-banner">
                     <div className="container trust-container">
                         <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-                            <span className="trust-badge-icon">⭐</span>
+                            <span className="trust-badge-icon" style={{ fontSize: '1rem', fontWeight: 800, marginRight: '5px' }}>5.0 Rating</span>
                             <div>
                                 <div style={{ color: '#d4af37' }}>5.0 Rating</div>
                                 <div>Google Reviews</div>
                             </div>
                         </motion.div>
                         <motion.div className="trust-badge" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-                            <span className="trust-badge-icon">🏆</span>
+                            <span className="trust-badge-icon" style={{ fontSize: '1rem', fontWeight: 800, marginRight: '5px' }}>Top Rated</span>
                             <div>
                                 <div style={{ color: '#d4af37' }}>Best of the Best</div>
                                 <div>HomeStars</div>
@@ -243,9 +243,9 @@
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
             const services = [
-                { icon: '🌿', title: 'Landscaping', desc: 'Lush sodding, garden design, and vibrant green spaces.' },
-                { icon: '🧱', title: 'Hardscaping', desc: 'Interlocking driveways, elegant patios, retaining walls.' },
-                { icon: '❄️', title: 'Snowplowing', desc: 'Reliable winter clearing for residential and commercial properties.' }
+                { title: 'Landscaping', desc: 'Lush sodding, garden design, and vibrant green spaces.' },
+                { title: 'Hardscaping', desc: 'Interlocking driveways, elegant patios, retaining walls.' },
+                { title: 'Snowplowing', desc: 'Reliable winter clearing for residential and commercial properties.' }
             ];
 
             return (
@@ -275,7 +275,7 @@
                                     variants={itemVariants}
                                     whileHover={{ scale: 1.05, translateY: -10 }}
                                 >
-                                    <div className="icon">{s.icon}</div>
+                                    <div className="icon" style={{ fontSize: '2.5rem', fontWeight: 900, color: '#d4af37' }}>0{i + 1}</div>
                                     <h3>{s.title}</h3>
                                     <p>{s.desc}</p>
                                 </motion.div>
@@ -376,16 +376,13 @@
                         overflow: 'hidden'
                     }}
                 >
-                    {/* Small Trophy Top Left */}
-                    <div style={{ position: 'absolute', top: '15px', left: '15px', color: '#3ba4eb', fontSize: '1.2rem' }}>🏆</div>
-                    {/* Faded Large Trophy Top Right/Background */}
-                    <div style={{ position: 'absolute', top: '0', right: '-10px', color: '#e8f4fa', fontSize: '5.5rem', zIndex: 0, opacity: 0.8 }}>🏆</div>
+                    
                     
                     <div style={{ position: 'relative', zIndex: 1, width: '100%', textAlign: 'center', marginTop: '10px' }}>
                         {type === 'best' ? (
                             <>
                                 <div style={{ position: 'relative', display: 'inline-block', marginBottom: '5px' }}>
-                                    <div style={{ position: 'absolute', top: '-18px', left: '-12px', color: '#f59e0b', fontSize: '1.8rem', transform: 'rotate(-25deg)' }}>👑</div>
+                                    <div style={{ position: 'absolute', top: '-18px', left: '-12px', color: '#f59e0b', fontSize: '1.8rem', transform: 'rotate(-25deg)' }}></div>
                                     <div style={{ background: '#3ba4eb', color: 'white', padding: '4px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 'bold' }}>
                                         HomeStars
                                     </div>
@@ -573,8 +570,9 @@
                                 className="contact-link"
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                             >
-                                <div className="contact-icon">✉️</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Email Us</div>
                                 <span>kyle_cuttingedge@hotmail.com</span>
                             </motion.a>
                             <motion.a 
@@ -582,8 +580,9 @@
                                 className="contact-link"
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                             >
-                                <div className="contact-icon">📞</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Call Us</div>
                                 <span>416 805 7642</span>
                             </motion.a>
                             <motion.a 
@@ -592,8 +591,9 @@
                                 className="contact-link"
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#d4af37" }}
+                                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                             >
-                                <div className="contact-icon">📍</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Visit Us Here</div>
                                 <span>66 Genthorn Ave, Etobicoke, ON M9W 2S9</span>
                             </motion.a>
                         </motion.div>
@@ -607,10 +607,10 @@
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
             const steps = [
-                { num: '01', sub: 'WE SERVE', title: 'Initial Contact & Consultation', icon: '🗓️' },
-                { num: '02', sub: 'WE SERVE', title: 'Site Visit & Assessment', icon: '📍' },
-                { num: '03', sub: 'WE SERVE', title: 'Written Proposal', icon: '📝' },
-                { num: '04', sub: 'WE SERVE', title: "Project Execution", icon: '🔨' }
+                { num: '01', sub: 'GET IN TOUCH', title: 'Initial Consultation' },
+                { num: '02', sub: 'WE SERVE', title: 'Site Visit & Assessment' },
+                { num: '03', sub: 'THE BUILD', title: 'Professional Execution' },
+                { num: '04', sub: 'FINAL STEP', title: 'Final Walkthrough' }
             ];
 
             return (
@@ -649,7 +649,7 @@
                                             <div className="step-sub">{s.sub}</div>
                                             <div className="step-title">{s.title}</div>
                                         </div>
-                                        <div className="step-icon">{s.icon}</div>
+
                                     </motion.div>
                                 ))}
                             </div>
