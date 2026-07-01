@@ -243,16 +243,16 @@
             const isInView = useInView(ref, { once: true, margin: "-100px" });
 
             const services = [
-                { title: 'Flagstone Natural Stone', image: 'assets/flagstone natural stone.jpeg' },
-                { title: 'Retaining Walls', image: 'assets/retaining walls.jpeg' },
-                { title: 'Hot tubs', image: 'assets/hottubs.jpeg' },
-                { title: 'Decks Fences', image: 'assets/deckfrances.jpeg' },
-                { title: 'Artificial Turf', image: 'assets/artificalterf.jpeg' },
-                { title: 'Property Maintenance', image: 'assets/property maintainance.jpeg' },
-                { title: 'Pool', image: 'assets/pond.jpeg' },
-                { title: 'Snow removal', image: 'assets/snow removal.jpeg' },
-                { title: 'Interlocking Stone', image: 'assets/interlockingstone.jpeg' },
-                { title: 'Sodding', image: 'assets/sodding.jpeg' }
+                { title: 'Flagstone Natural Stone', image: 'assets/flagstone natural stone.jpeg', objectPosition: 'center bottom' },
+                { title: 'Retaining Walls', image: 'assets/retaining walls.jpeg', objectPosition: 'center' },
+                { title: 'Hot tubs', image: 'assets/hottubs.jpeg', objectPosition: 'center' },
+                { title: 'Decks Fences', image: 'assets/deckfrances.jpeg', objectPosition: 'center' },
+                { title: 'Artificial Turf', image: 'assets/artificalterf.jpeg', objectPosition: 'center' },
+                { title: 'Property Maintenance', image: 'assets/property maintainance.jpeg', objectPosition: 'center' },
+                { title: 'Pool', image: 'assets/pond.jpeg', objectPosition: 'center' },
+                { title: 'Snow removal', image: 'assets/snow removal.jpeg', objectPosition: 'center' },
+                { title: 'Interlocking Stone', image: 'assets/interlockingstone.jpeg', objectPosition: 'center' },
+                { title: 'Sodding', image: 'assets/sodding.jpeg', objectPosition: 'center' }
             ];
 
             return (
@@ -287,7 +287,7 @@
                                         <button className="service-plus-btn">+</button>
                                     </div>
                                     <div className="service-img-wrapper">
-                                        <img src={s.image} alt={s.title} className="service-image" />
+                                        <img src={s.image} alt={s.title} className="service-image" style={{ objectPosition: s.objectPosition || 'center' }} />
                                     </div>
                                 </motion.div>
                             ))}
