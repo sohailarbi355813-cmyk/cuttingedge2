@@ -157,10 +157,10 @@
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.6 }}
-                                    style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderRadius: '50px', display: 'flex', width: 'fit-content', maxWidth: '100%', padding: '6px', gap: '5px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}
+                                    className="hero-toggle"
                                 >
-                                    <button onClick={() => setMode('summer')} style={{ background: mode === 'summer' ? '#519e54' : 'transparent', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif", whiteSpace: 'nowrap' }}>Landscaping</button>
-                                    <button onClick={() => setMode('winter')} style={{ background: mode === 'winter' ? '#519e54' : 'transparent', color: 'white', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: '0.3s', fontFamily: "'Montserrat', sans-serif", whiteSpace: 'nowrap' }}>Snowplowing</button>
+                                    <button onClick={() => setMode('summer')} className={`toggle-pill ${mode === 'summer' ? 'active' : ''}`}>🌿 Landscaping</button>
+                                    <button onClick={() => setMode('winter')} className={`toggle-pill ${mode === 'winter' ? 'active' : ''}`}>❄️ Snowplowing</button>
                                 </motion.div>
                             </div>
 
@@ -173,6 +173,8 @@
                                 <h3>Request a Free Quote</h3>
                                 <form action="https://api.web3forms.com/submit" method="POST">
                                     <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+                                    <input type="hidden" name="subject" value="New Quote Request - Cutting Edge Landscaping" />
+                                    <input type="hidden" name="redirect" value="https://cuttingedge2.vercel.app/?submitted=true" />
                                     <div className="form-group">
                                         <input type="text" name="name" className="form-input" placeholder="Full Name" required />
                                     </div>
@@ -188,7 +190,7 @@
                                             <option value="other">Other / Maintenance</option>
                                         </select>
                                     </div>
-                                    <button type="submit" className="btn-submit">Get My Quote</button>
+                                    <button type="submit" className="btn-submit">📩 Get My Free Quote</button>
                                 </form>
                             </motion.div>
                         </div>
