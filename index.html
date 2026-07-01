@@ -113,10 +113,12 @@
                                     style={{ 
                                         color: '#d4af37', 
                                         fontFamily: "'Yellowtail', cursive", 
-                                        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                                        fontSize: 'clamp(1.8rem, 6vw, 4rem)',
                                         marginBottom: '-1rem',
                                         transform: 'rotate(-3deg)',
-                                        display: 'inline-block'
+                                        display: 'inline-block',
+                                        overflowWrap: 'break-word',
+                                        maxWidth: '100%'
                                     }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -127,12 +129,14 @@
                                 <motion.h1 
                                     style={{ 
                                         color: 'white', 
-                                        fontSize: 'clamp(3rem, 6vw, 4.5rem)', 
+                                        fontSize: 'clamp(2rem, 8vw, 4.5rem)', 
                                         fontWeight: 900, 
                                         lineHeight: '1.1', 
                                         marginBottom: '1.5rem', 
                                         fontFamily: "'Montserrat', sans-serif",
-                                        textTransform: 'uppercase'
+                                        textTransform: 'uppercase',
+                                        overflowWrap: 'break-word',
+                                        maxWidth: '100%'
                                     }}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
