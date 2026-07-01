@@ -197,10 +197,10 @@
                                 transition={{ delay: 0.8, type: "spring" }}
                             >
                                 <h3>Request a Free Quote</h3>
-                                <form action="https://api.web3forms.com/submit" method="POST">
-                                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-                                    <input type="hidden" name="subject" value="New Quote Request - Cutting Edge Landscaping" />
-                                    <input type="hidden" name="redirect" value="https://cuttingedge2.vercel.app/?submitted=true" />
+                                <form action="https://formsubmit.co/kyle_cuttingedge@hotmail.com" method="POST">
+                                    <input type="hidden" name="_subject" value="New Quote Request - Cutting Edge Landscaping" />
+                                    <input type="hidden" name="_next" value="https://cuttingedge2.vercel.app/?submitted=true" />
+                                    <input type="hidden" name="_captcha" value="false" />
                                     <div className="form-group">
                                         <input type="text" name="name" className="form-input" placeholder="Full Name" required />
                                     </div>
