@@ -16,7 +16,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
     font-family: var(--font-sans);
@@ -54,6 +54,7 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     position: fixed;
     top: 0; left: 0; width: 100%;
     background-color: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: padding 0.3s ease;
@@ -265,6 +266,7 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     border-radius: 50px;
     transition: var(--transition);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
 }
 
 .toggle-btn:hover, .toggle-btn.active {
@@ -558,6 +560,9 @@ h1, h2, h3, h4 { font-weight: 900; line-height: 1.2; color: var(--secondary-navy
     border-radius: 8px;
     color: white;
     font-family: var(--font-sans);
+    font-size: 16px; /* Prevents Safari iOS auto-zoom */
+    -webkit-appearance: none; /* Removes Safari default styling */
+    appearance: none;
 }
 .form-input::placeholder {
     color: rgba(255,255,255,0.5);
