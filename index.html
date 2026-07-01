@@ -201,16 +201,22 @@
                                     <input type="hidden" name="_subject" value="New Quote Request - Cutting Edge Landscaping" />
                                     <input type="hidden" name="_next" value="https://cuttingedge2.vercel.app/?submitted=true" />
                                     <input type="hidden" name="_captcha" value="false" />
-                                    <div className="form-group">
+                                    <div className="form-group" style={{ position: 'relative' }}>
                                         <input type="text" name="name" className="form-input" placeholder="Full Name" required />
+                                        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#ef4444', fontSize: '1.2rem', pointerEvents: 'none' }}>*</span>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{ position: 'relative' }}>
                                         <input type="email" name="email" className="form-input" placeholder="Email Address" required />
+                                        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#ef4444', fontSize: '1.2rem', pointerEvents: 'none' }}>*</span>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{ position: 'relative' }}>
                                         <input type="tel" name="phone" className="form-input" placeholder="Phone Number" required />
+                                        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#ef4444', fontSize: '1.2rem', pointerEvents: 'none' }}>*</span>
                                     </div>
                                     <div className="form-group">
+                                        <input type="text" name="address" className="form-input" placeholder="Location / Address (Optional)" />
+                                    </div>
+                                    <div className="form-group" style={{ position: 'relative' }}>
                                         <select name="service" className="form-input" required defaultValue="">
                                             <option value="" disabled>Select Service...</option>
                                             <option value="landscaping">Landscaping</option>
@@ -218,6 +224,7 @@
                                             <option value="snowplowing">Snowplowing</option>
                                             <option value="other">Other / Maintenance</option>
                                         </select>
+                                        <span style={{ position: 'absolute', right: '35px', top: '50%', transform: 'translateY(-50%)', color: '#ef4444', fontSize: '1.2rem', pointerEvents: 'none' }}>*</span>
                                     </div>
                                     <button type="submit" className="btn-submit">Get My Free Quote</button>
                                 </form>
